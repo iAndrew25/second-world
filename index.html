@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			background-color: white;
+			text-align: center;
+		}
+
+		canvas {
+			background-color: #eee;
+		}
+	</style>
+</head>
+<body>
+	<h1>Second world</h1>
+	<canvas id="world"></canvas>
+
+	<script src="js/point.js"></script>
+	<script src="js/segment.js"></script>
+	<script src="js/graph.js"></script>
+	<script src="js/clock.js"></script>
+	<script src="js/world-editor.js"></script>
+	<script>
+		const canvas = document.getElementById('world');
+		const ctx = canvas.getContext('2d');
+
+		canvas.width = 600;
+		canvas.height = 600;
+
+		const clock = new Clock(canvas, 400, {x: 300, y: 300});
+
+		clock.run();
+
+		// const p1 = new Point(60, 300);
+		// const p2 = new Point(170, 250);
+		// const p3 = new Point(120, 140);
+
+		// const s1 = new Segment(p1, p2);
+		// const s2 = new Segment(p1, p3);
+		
+		// const graph = new Graph([p1, p2, p3], [s1, s2]);
+
+		// const worldEditor = new WorldEditor(canvas, graph);
+
+		// worldEditor.run();
+	</script>
+</body>
+</html>
