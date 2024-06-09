@@ -16,19 +16,19 @@ class Clock {
 	}
 
 	#generatePoints() {
-		const numbersOnClock = 12;
-		const numbersOffset = 3;
-
+		const numbersOnClock = 60;
+		const numbersOffset = numbersOnClock/4;
 
 		for (let i = 1; i <= numbersOnClock; i++) {
 			const angle = (i - numbersOffset) * (Math.PI * 2) / numbersOnClock;
 			const x = this.offsets.x + this.size / 2 * Math.cos(angle);
 			const y = this.offsets.y + this.size / 2 * Math.sin(angle);
+			const size = i % 5 === 0 ? 16 : 4;
 
 			if(i === numbersOnClock) {
-				this.points.unshift(new Point(x, y));
+				this.points.unshift(new Point(x, y, {size}));
 			} else {
-				this.points.push(new Point(x, y));				
+				this.points.push(new Point(x, y, {size}));
 			}
 		}
 
@@ -39,11 +39,11 @@ class Clock {
 	#generateSegments() {
 		const date = new Date();
 
-		const hourIndex = date.getHours() % 12;
-		const minutesIndex = Math.floor(date.getMinutes() / 5);
-		const secondsIndex = Math.floor(date.getSeconds() / 5);
+		const hourIndex = (date.getHours() % 12) * 5;
+		const minutesIndex = date.getMinutes();
+		const secondsIndex = date.getSeconds();
 
-		this.segments.push(new Segment(this.points[12], this.points[hourIndex], 8));
+		this.segments.push(new Segment(this.points[60], this.points[hourIndex], 8));
 		this.segments.push(new Segment(this.points[hourIndex], this.points[minutesIndex], 4));
 		this.segments.push(new Segment(this.points[minutesIndex], this.points[secondsIndex], 2));
 	}
